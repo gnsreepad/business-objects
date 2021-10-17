@@ -1,0 +1,48 @@
+type Opportunity {
+    id: ID!
+    name: String!
+    winPercentage: String
+    account: String!
+    primaryContact: String!
+    closeDate: String
+    estimatedRevenue: String
+    riskLevel: Risk
+}
+
+enum Risk {
+  HIGH
+  MEDIUM
+  LOW
+}
+
+input CreateOpportunity { 
+    id: ID!
+    name: String!
+    winPercentage: Float
+    account: String!
+    primaryContact: String!
+    closeDate: String
+    estimatedRevenue: Float
+    riskLevel: Risk
+}
+
+input UpdateOpportunity {
+    name: String!
+    winPercentage: Float
+    account: String!
+    primaryContact: String!
+    closeDate: String
+    estimatedRevenue: Float
+    riskLevel: Risk
+}
+
+
+type Query {
+    getOpportunityByName(name: String!): Opportunity
+    getOpportunityByAccount(account: String!): Opportunity
+}
+
+type Mutation {
+    createOpportunity(createOpportunityInput: CreateOpportunity!): Opportunity!
+    updateOpportunity(updateOpportunityInput: UpdateOpportunity!): Opportunity!
+}
