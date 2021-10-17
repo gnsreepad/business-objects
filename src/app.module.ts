@@ -4,7 +4,7 @@ import { ConfigModule } from '@nestjs/config';
 import { AppGraphQLModule } from './graphql/graphql.module';
 
 @Module({
-  imports: [DatabaseModule, ConfigModule.forRoot()],
+  imports: [DatabaseModule, ConfigModule.forRoot(), AppGraphQLModule],
   controllers: [],
   providers: [],
 })
