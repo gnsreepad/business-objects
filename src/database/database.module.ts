@@ -21,7 +21,7 @@ import { SnakeNamingStrategy } from 'typeorm-naming-strategies';
         ],
         namingStrategy: new SnakeNamingStrategy(),
         synchronize: false,
-        logging: true,
+        logging: false,
       }),
     }),
   ],
