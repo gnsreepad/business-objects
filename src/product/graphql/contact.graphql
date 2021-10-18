@@ -20,7 +20,6 @@ input CreateContact {
 }
 
 input UpdateContact {
-    email: String!
     name: String
     account: String
     address: String
@@ -36,5 +35,5 @@ type Query {
 
 type Mutation {
     createContact(createContactInput: CreateContact): Contact!
-    updateContact(updateContactInput: UpdateContact): Contact!
+    updateContact(email: String!, updateContactInput: UpdateContact): Contact!
 }
