@@ -3,32 +3,30 @@ type Contact {
     name: String!
     account: String!
     address: String!
-    title: String!
+    title: String
     workPhone: String
     mobilePhone: String
-    email: String
+    email: String!
 }
 
 input CreateContact { 
-    id: ID!
     name: String!
     account: String!
     address: String!
-    title: String!
+    title: String
     workPhone: String
     mobilePhone: String
-    email: String
+    email: String!
 }
 
-input UpdateContact { 
-    id: ID!
-    name: String!
-    account: String!
-    address: String!
-    title: String!
+input UpdateContact {
+    email: String!
+    name: String
+    account: String
+    address: String
+    title: String
     workPhone: String
     mobilePhone: String
-    email: String
 }
 
 type Query {

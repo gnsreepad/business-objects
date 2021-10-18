@@ -16,23 +16,22 @@ enum Risk {
 }
 
 input CreateOpportunity { 
-    id: ID!
     name: String!
-    winPercentage: Float
+    winPercentage: String
     account: String!
-    primaryContact: String!
+    primaryContact: String
     closeDate: String
-    estimatedRevenue: Float
+    estimatedRevenue: String
     riskLevel: Risk
 }
 
 input UpdateOpportunity {
-    name: String!
-    winPercentage: Float
     account: String!
-    primaryContact: String!
+    name: String
+    winPercentage: String
+    primaryContact: String
     closeDate: String
-    estimatedRevenue: Float
+    estimatedRevenue: String
     riskLevel: Risk
 }
 
