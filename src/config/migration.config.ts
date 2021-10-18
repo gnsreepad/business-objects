@@ -3,7 +3,7 @@ import { SnakeNamingStrategy } from 'typeorm-naming-strategies';
 /**
  * Uses env params to configure TypeORM database library
  */
-export const rdbmsConfig: ConnectionOptions = {
+const rdbmsConfig: ConnectionOptions = {
   database: process.env.POSTGRES_DB,
   entities: [
     __dirname + '/../**/*.entity.ts',
@@ -23,3 +23,5 @@ export const rdbmsConfig: ConnectionOptions = {
     migrationsDir: 'src/migrations',
   },
 };
+
+export = rdbmsConfig;
