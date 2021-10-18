@@ -3,7 +3,7 @@ type Opportunity {
     name: String!
     winPercentage: String
     account: String!
-    primaryContact: String!
+    primaryContact: String
     closeDate: String
     estimatedRevenue: String
     riskLevel: Risk
