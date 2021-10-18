@@ -1,6 +1,15 @@
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import {
+  Column,
+  Entity,
+  JoinTable,
+  ManyToMany,
+  OneToMany,
+  PrimaryGeneratedColumn,
+} from 'typeorm';
 import { Risk } from '../../schema/graphql.schema';
 import { BaseEntity } from './base.entity';
+import { ContactOpportunity } from './contact-opportunity.entity';
+import { Contact } from './contact.entity';
 
 @Entity()
 export class Opportunity extends BaseEntity {
@@ -27,4 +36,7 @@ export class Opportunity extends BaseEntity {
 
   @Column({ nullable: true })
   riskLevel?: Risk;
+
+  @OneToMany(() => ContactOpportunity, (co) => co.opportunityId)
+  contactConnection: Promise<ContactOpportunity[]>;
 }

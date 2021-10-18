@@ -4,25 +4,11 @@ import { Opportunity } from './opportunity.entity';
 
 @Entity()
 export class ContactOpportunity {
-  @PrimaryColumn()
+  @ManyToOne(() => Contact, (contact) => contact.opportunityConnection)
+  @JoinColumn({ name: 'contact_id' })
   contactId: string;
 
-  @PrimaryColumn()
+  @ManyToOne(() => Opportunity, (opportunity) => opportunity.contactConnection)
+  @JoinColumn({ name: 'opportunity_id' })
   opportunityId: string;
-
-  @ManyToOne(() => Contact, (contact) => contact.opportunityConnection, {
-    primary: true,
-  })
-  @JoinColumn({ name: 'contactId' })
-  contact: Promise<Contact>;
-
-  @ManyToOne(
-    () => Opportunity,
-    (opportunity) => opportunity.contactConnection,
-    {
-      primary: true,
-    },
-  )
-  @JoinColumn({ name: 'opportunityId' })
-  opportunity: Promise<Contact>;
 }

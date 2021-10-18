@@ -1,5 +1,13 @@
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import {
+  Column,
+  Entity,
+  ManyToMany,
+  OneToMany,
+  PrimaryGeneratedColumn,
+} from 'typeorm';
 import { BaseEntity } from './base.entity';
+import { ContactOpportunity } from './contact-opportunity.entity';
+import { Opportunity } from './opportunity.entity';
 
 @Entity()
 export class Contact extends BaseEntity {
@@ -26,4 +34,7 @@ export class Contact extends BaseEntity {
 
   @Column({ nullable: true })
   mobilePhone?: string;
+
+  @OneToMany(() => ContactOpportunity, (co) => co.contactId)
+  opportunityConnection: Promise<ContactOpportunity[]>;
 }
