@@ -3,12 +3,10 @@ import {
   Entity,
   JoinTable,
   ManyToMany,
-  OneToMany,
   PrimaryGeneratedColumn,
 } from 'typeorm';
 import { Risk } from '../../schema/graphql.schema';
 import { BaseEntity } from './base.entity';
-import { ContactOpportunity } from './contact-opportunity.entity';
 import { Contact } from './contact.entity';
 
 @Entity()
@@ -37,6 +35,17 @@ export class Opportunity extends BaseEntity {
   @Column({ nullable: true })
   riskLevel?: Risk;
 
-  @OneToMany(() => ContactOpportunity, (co) => co.opportunityId)
-  contactConnection: Promise<ContactOpportunity[]>;
+  @ManyToMany(() => Contact, (contact) => contact.opportunities, {
+    cascade: true,
+  })
+  @JoinTable({
+    name: 'opp_contact',
+    joinColumn: {
+      name: 'opportunity_id',
+    },
+    inverseJoinColumn: {
+      name: 'contact_id',
+    },
+  })
+  contacts: Contact[];
 }

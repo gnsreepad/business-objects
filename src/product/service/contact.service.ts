@@ -1,4 +1,4 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
+import { ConsoleLogger, Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { CreateContact, UpdateContact } from '../../schema/graphql.schema';
@@ -20,6 +20,7 @@ export class ContactSercie {
   }
 
   async createContact(createContactInput: CreateContact): Promise<Contact> {
+    console.log(createContactInput);
     const newContact = this.contactRepository.create(createContactInput);
     const contact = await this.contactRepository.save(newContact);
     return contact;
@@ -30,7 +31,7 @@ export class ContactSercie {
     updateContactInput: UpdateContact,
   ): Promise<Contact> {
     const currentContact = await this.getContactByEmail(email);
-    const editContact = updateContactInput;
+    const editContact: any = updateContactInput;
     editContact.id = currentContact.id;
     const contact = await this.contactRepository.save(editContact);
     return contact;

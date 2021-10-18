@@ -14,45 +14,41 @@ export enum Risk {
 }
 
 export interface CreateContact {
-    id: string;
     name: string;
     account: string;
     address: string;
-    title: string;
+    title?: Nullable<string>;
     workPhone?: Nullable<string>;
     mobilePhone?: Nullable<string>;
-    email?: Nullable<string>;
+    email: string;
 }
 
 export interface UpdateContact {
-    id: string;
-    name: string;
-    account: string;
-    address: string;
-    title: string;
+    name?: Nullable<string>;
+    account?: Nullable<string>;
+    address?: Nullable<string>;
+    title?: Nullable<string>;
     workPhone?: Nullable<string>;
     mobilePhone?: Nullable<string>;
-    email?: Nullable<string>;
 }
 
 export interface CreateOpportunity {
-    id: string;
     name: string;
-    winPercentage?: Nullable<number>;
+    winPercentage?: Nullable<string>;
     account: string;
-    primaryContact: string;
+    primaryContact?: Nullable<string>;
     closeDate?: Nullable<string>;
-    estimatedRevenue?: Nullable<number>;
+    estimatedRevenue?: Nullable<string>;
     riskLevel?: Nullable<Risk>;
 }
 
 export interface UpdateOpportunity {
-    name: string;
-    winPercentage?: Nullable<number>;
     account: string;
-    primaryContact: string;
+    name?: Nullable<string>;
+    winPercentage?: Nullable<string>;
+    primaryContact?: Nullable<string>;
     closeDate?: Nullable<string>;
-    estimatedRevenue?: Nullable<number>;
+    estimatedRevenue?: Nullable<string>;
     riskLevel?: Nullable<Risk>;
 }
 
@@ -61,10 +57,10 @@ export interface Contact {
     name: string;
     account: string;
     address: string;
-    title: string;
+    title?: Nullable<string>;
     workPhone?: Nullable<string>;
     mobilePhone?: Nullable<string>;
-    email?: Nullable<string>;
+    email: string;
 }
 
 export interface IQuery {
@@ -76,7 +72,7 @@ export interface IQuery {
 
 export interface IMutation {
     createContact(createContactInput?: Nullable<CreateContact>): Contact | Promise<Contact>;
-    updateContact(updateContactInput?: Nullable<UpdateContact>): Contact | Promise<Contact>;
+    updateContact(email: string, updateContactInput?: Nullable<UpdateContact>): Contact | Promise<Contact>;
     createOpportunity(createOpportunityInput: CreateOpportunity): Opportunity | Promise<Opportunity>;
     updateOpportunity(updateOpportunityInput: UpdateOpportunity): Opportunity | Promise<Opportunity>;
 }
@@ -86,10 +82,11 @@ export interface Opportunity {
     name: string;
     winPercentage?: Nullable<string>;
     account: string;
-    primaryContact: string;
+    primaryContact?: Nullable<string>;
     closeDate?: Nullable<string>;
     estimatedRevenue?: Nullable<string>;
     riskLevel?: Nullable<Risk>;
+    contactList?: Nullable<Nullable<Contact>[]>;
 }
 
 type Nullable<T> = T | null;
