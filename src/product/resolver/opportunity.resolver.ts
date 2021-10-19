@@ -98,7 +98,7 @@ export class OpportunityResolver {
 
   private convertToGraphqlObject(opportunity): Opportunity {
     const convertedOpp: any = opportunity;
-    convertedOpp.closeDate = opportunity.closeDate.toString();
+    convertedOpp.closeDate = opportunity.closeDate?.toString() || undefined;
     return convertedOpp;
   }
 }

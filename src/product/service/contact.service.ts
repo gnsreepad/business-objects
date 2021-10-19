@@ -74,7 +74,7 @@ export class ContactService {
   private convertToGraphqlObject(opportunity: any[]): Opportunity[] {
     const convertedOpp = opportunity.map((opp) => {
       const modOpp: any = opp;
-      modOpp.closeDate = opp.closeDate.toString();
+      modOpp.closeDate = opp.closeDate?.toString() || undefined;
       return modOpp;
     });
     return convertedOpp;
