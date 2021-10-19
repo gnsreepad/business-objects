@@ -90,4 +90,18 @@ export class OpportunityService {
     const newOpportunity = await this.opportunityRepository.save(opportunity);
     return newOpportunity;
   }
+
+  async addPrimaryContact(
+    opportunityAccount: string,
+    contactEmail: string,
+  ): Promise<Opportunity> {
+    const contact: Contact = await this.contactService.getContactByEmail(
+      contactEmail,
+    );
+    const opportunity = await this.getOpportunityByAccount(opportunityAccount);
+    opportunity.contacts.push(contact);
+    opportunity.primaryContact = contactEmail;
+    const newOpportunity = await this.opportunityRepository.save(opportunity);
+    return newOpportunity;
+  }
 }

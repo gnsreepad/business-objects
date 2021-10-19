@@ -62,12 +62,27 @@ export class OpportunityResolver {
   async addContact(
     @Args('opportunityAccount')
     opportunityAccount: string,
-    @Args('contactEmailList')
+    @Args('contactEmail')
     contactEmailList: string,
   ): Promise<Opportunity> {
     const opportunity = await this.opportunityService.addContact(
       opportunityAccount,
       contactEmailList,
+    );
+    console.log('opportunity', opportunity);
+    return this.convertToGraphqlObject(opportunity);
+  }
+
+  @Mutation()
+  async addPrimaryContact(
+    @Args('opportunityAccount')
+    opportunityAccount: string,
+    @Args('primaryContactEmail')
+    primaryContactEmail: string,
+  ): Promise<Opportunity> {
+    const opportunity = await this.opportunityService.addPrimaryContact(
+      opportunityAccount,
+      primaryContactEmail,
     );
     console.log('opportunity', opportunity);
     return this.convertToGraphqlObject(opportunity);

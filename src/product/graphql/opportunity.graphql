@@ -45,5 +45,6 @@ type Query {
 type Mutation {
     createOpportunity(createOpportunityInput: CreateOpportunity!): Opportunity!
     updateOpportunity(account: String!, updateOpportunityInput: UpdateOpportunity!): Opportunity!
-    addContact(opportunityAccount: String!, contactEmailList: String!): Opportunity!
+    addContact(opportunityAccount: String!, contactEmail: String!): Opportunity!
+    addPrimaryContact(opportunityAccount: String!, primaryContactEmail: String!): Opportunity!
 }
