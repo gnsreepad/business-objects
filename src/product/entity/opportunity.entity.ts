@@ -47,5 +47,5 @@ export class Opportunity extends BaseEntity {
       name: 'contact_id',
     },
   })
-  contacts: Contact[];
+  contacts?: Contact[];
 }

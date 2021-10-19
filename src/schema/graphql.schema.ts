@@ -34,7 +34,7 @@ export interface UpdateContact {
 
 export interface CreateOpportunity {
     name: string;
-    winPercentage?: Nullable<string>;
+    winPercentage?: Nullable<number>;
     account: string;
     primaryContact?: Nullable<string>;
     closeDate?: Nullable<string>;
@@ -45,7 +45,7 @@ export interface CreateOpportunity {
 export interface UpdateOpportunity {
     account: string;
     name?: Nullable<string>;
-    winPercentage?: Nullable<string>;
+    winPercentage?: Nullable<number>;
     primaryContact?: Nullable<string>;
     closeDate?: Nullable<string>;
     estimatedRevenue?: Nullable<string>;
@@ -80,7 +80,7 @@ export interface IMutation {
 export interface Opportunity {
     id: string;
     name: string;
-    winPercentage?: Nullable<string>;
+    winPercentage?: Nullable<number>;
     account: string;
     primaryContact?: Nullable<string>;
     closeDate?: Nullable<string>;

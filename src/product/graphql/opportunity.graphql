@@ -1,7 +1,7 @@
 type Opportunity {
     id: ID!
     name: String!
-    winPercentage: String
+    winPercentage: Float
     account: String!
     primaryContact: String
     closeDate: String
@@ -18,7 +18,7 @@ enum Risk {
 
 input CreateOpportunity { 
     name: String!
-    winPercentage: String
+    winPercentage: Float
     account: String!
     primaryContact: String
     closeDate: String
@@ -27,9 +27,8 @@ input CreateOpportunity {
 }
 
 input UpdateOpportunity {
-    account: String!
     name: String
-    winPercentage: String
+    winPercentage: Float
     primaryContact: String
     closeDate: String
     estimatedRevenue: String
@@ -44,5 +43,5 @@ type Query {
 
 type Mutation {
     createOpportunity(createOpportunityInput: CreateOpportunity!): Opportunity!
-    updateOpportunity(updateOpportunityInput: UpdateOpportunity!): Opportunity!
+    updateOpportunity(account: String!, updateOpportunityInput: UpdateOpportunity!): Opportunity!
 }
