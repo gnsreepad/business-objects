@@ -24,10 +24,15 @@ export class OpportunityService {
   ) {}
 
   async getOpportunityByName(name: string): Promise<Opportunity> {
-    const opportunity = this.opportunityRepository.findOne({
-      relations: ['contacts'],
-      where: { name: name },
-    });
+    let opportunity;
+    try {
+      opportunity = this.opportunityRepository.findOne({
+        relations: ['contacts'],
+        where: { name: name },
+      });
+    } catch (err) {
+      throw new Error('No opportunity with given credentials exist');
+    }
 
     if (!opportunity) {
       throw new NotFoundException(
@@ -39,10 +44,15 @@ export class OpportunityService {
   }
 
   async getOpportunityByAccount(account: string): Promise<Opportunity> {
-    const opportunity = this.opportunityRepository.findOne({
-      relations: ['contacts'],
-      where: { account: account },
-    });
+    let opportunity;
+    try {
+      opportunity = this.opportunityRepository.findOne({
+        relations: ['contacts'],
+        where: { account: account },
+      });
+    } catch {
+      throw new Error('No opportunity with given credentials exist');
+    }
 
     if (!opportunity) {
       throw new NotFoundException(
@@ -100,8 +110,8 @@ export class OpportunityService {
       undefined,
       contactEmail,
     );
+    console.log('contact', contact);
     const opportunity = await this.getOpportunityByAccount(opportunityAccount);
-    opportunity.contacts.push(contact);
     opportunity.primaryContact = contactEmail;
     const newOpportunity = await this.opportunityRepository.save(opportunity);
     return newOpportunity;
