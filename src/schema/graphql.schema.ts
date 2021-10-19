@@ -43,7 +43,6 @@ export interface CreateOpportunity {
 }
 
 export interface UpdateOpportunity {
-    account: string;
     name?: Nullable<string>;
     winPercentage?: Nullable<number>;
     primaryContact?: Nullable<string>;
@@ -74,7 +73,7 @@ export interface IMutation {
     createContact(createContactInput?: Nullable<CreateContact>): Contact | Promise<Contact>;
     updateContact(email: string, updateContactInput?: Nullable<UpdateContact>): Contact | Promise<Contact>;
     createOpportunity(createOpportunityInput: CreateOpportunity): Opportunity | Promise<Opportunity>;
-    updateOpportunity(updateOpportunityInput: UpdateOpportunity): Opportunity | Promise<Opportunity>;
+    updateOpportunity(account: string, updateOpportunityInput: UpdateOpportunity): Opportunity | Promise<Opportunity>;
 }
 
 export interface Opportunity {
