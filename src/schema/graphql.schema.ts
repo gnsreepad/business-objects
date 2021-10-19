@@ -62,9 +62,14 @@ export interface Contact {
     email: string;
 }
 
+export interface GetContact {
+    contact?: Nullable<Contact>;
+    opportunities?: Nullable<Nullable<Opportunity>[]>;
+}
+
 export interface IQuery {
-    getContactByName(name: string): Nullable<Contact> | Promise<Nullable<Contact>>;
-    getContactByEmail(email: string): Nullable<Contact> | Promise<Nullable<Contact>>;
+    getContactByName(name: string): Nullable<GetContact> | Promise<Nullable<GetContact>>;
+    getContactByEmail(email: string): Nullable<GetContact> | Promise<Nullable<GetContact>>;
     getOpportunityByName(name: string): Nullable<Opportunity> | Promise<Nullable<Opportunity>>;
     getOpportunityByAccount(account: string): Nullable<Opportunity> | Promise<Nullable<Opportunity>>;
 }
@@ -72,6 +77,7 @@ export interface IQuery {
 export interface IMutation {
     createContact(createContactInput?: Nullable<CreateContact>): Contact | Promise<Contact>;
     updateContact(email: string, updateContactInput?: Nullable<UpdateContact>): Contact | Promise<Contact>;
+    deleteContact(email: string): boolean | Promise<boolean>;
     createOpportunity(createOpportunityInput: CreateOpportunity): Opportunity | Promise<Opportunity>;
     updateOpportunity(account: string, updateOpportunityInput: UpdateOpportunity): Opportunity | Promise<Opportunity>;
     addContact(opportunityAccount: string, contactEmail: string): Opportunity | Promise<Opportunity>;

@@ -81,7 +81,8 @@ export class OpportunityService {
     //   return contact;
     // });
 
-    const contact: Contact = await this.contactService.getContactByEmail(
+    const contact: Contact = await this.contactService.findContact(
+      undefined,
       contactEmail,
     );
 
@@ -95,7 +96,8 @@ export class OpportunityService {
     opportunityAccount: string,
     contactEmail: string,
   ): Promise<Opportunity> {
-    const contact: Contact = await this.contactService.getContactByEmail(
+    const contact: Contact = await this.contactService.findContact(
+      undefined,
       contactEmail,
     );
     const opportunity = await this.getOpportunityByAccount(opportunityAccount);

@@ -9,6 +9,11 @@ type Contact {
     email: String!
 }
 
+type GetContact {
+    contact: Contact
+    opportunities: [Opportunity]
+}
+
 input CreateContact { 
     name: String!
     account: String!
@@ -29,11 +34,12 @@ input UpdateContact {
 }
 
 type Query {
-    getContactByName(name: String!): Contact
-    getContactByEmail(email: String!): Contact
+    getContactByName(name: String!): GetContact
+    getContactByEmail(email: String!): GetContact
 }
 
 type Mutation {
     createContact(createContactInput: CreateContact): Contact!
     updateContact(email: String!, updateContactInput: UpdateContact): Contact!
+    deleteContact(email: String!): Boolean!
 }

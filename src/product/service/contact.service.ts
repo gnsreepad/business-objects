@@ -1,25 +1,27 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
-import { CreateContact, UpdateContact } from '../../schema/graphql.schema';
+import {
+  CreateContact,
+  GetContact,
+  Opportunity,
+  UpdateContact,
+} from '../../schema/graphql.schema';
 import { Contact } from '../entity/contact.entity';
-import { Opportunity } from '../entity/opportunity.entity';
 
 @Injectable()
 export class ContactService {
   constructor(
     @InjectRepository(Contact)
     private readonly contactRepository: Repository<Contact>,
-    @InjectRepository(Contact)
-    private readonly opportunityRepository: Repository<Opportunity>,
   ) {}
 
-  getContactByName(name: string): Promise<Contact> {
-    return this.findContact(name, undefined);
+  getContactByName(name: string): Promise<GetContact> {
+    return this.findContactAndOpportunity(name, undefined);
   }
 
-  async getContactByEmail(email: string): Promise<Contact> {
-    const contact = await this.findContact(undefined, email);
+  async getContactByEmail(email: string): Promise<GetContact> {
+    const contact = await this.findContactAndOpportunity(undefined, email);
     return contact;
   }
 
@@ -34,39 +36,81 @@ export class ContactService {
     email: string,
     updateContactInput: UpdateContact,
   ): Promise<Contact> {
-    const currentContact = await this.getContactByEmail(email);
+    const currentContact = await this.findContact(undefined, email);
     const editContact: any = updateContactInput;
     editContact.id = currentContact.id;
     const contact = await this.contactRepository.save(editContact);
     return contact;
   }
 
-  async addOpportunity(email: string) {
-    const opp = {
-      name: 'hai',
-      account: 'acc',
-    };
-    const newOpp = this.opportunityRepository.create(opp);
-    const contact = await this.getContactByEmail(email);
-    contact.opportunities = [newOpp];
-    const savedcontact = await this.contactRepository.save(contact);
-    return savedcontact;
+  // async addOpportunity(email: string) {
+  //   const opp = {
+  //     name: 'hai',
+  //     account: 'acc',
+  //   };
+  //   const newOpp = this.opportunityRepository.create(opp);
+  //   const contact = await this.getContactByEmail(email);
+  //   contact.opportunities = [newOpp];
+  //   const savedcontact = await this.contactRepository.save(contact);
+  //   return savedcontact;
+  // }
+
+  async deleteContact(email: string) {
+    await this.contactRepository.delete({ email: email });
+    return true;
   }
 
-  private async findContact(
-    name: string = undefined,
-    email: string = undefined,
-  ): Promise<Contact> {
-    // console.log('name', name);
-    // console.log('email', email);
+  private convertToGraphqlObject(opportunity: any[]): Opportunity[] {
+    const convertedOpp = opportunity.map((opp) => {
+      const modOpp: any = opp;
+      modOpp.closeDate = opp.closeDate.toString();
+      return modOpp;
+    });
+    return convertedOpp;
+  }
+
+  private async findContactAndOpportunity(
+    nameInput: string = undefined,
+    emailInput: string = undefined,
+  ): Promise<GetContact> {
     let result: Contact;
-    if (name) {
+    if (nameInput) {
       result = await this.contactRepository.findOne({
-        where: { name: name },
+        relations: ['opportunities'],
+        where: { name: nameInput },
       });
-    } else if (email) {
+    } else if (emailInput) {
       result = await this.contactRepository.findOne({
-        where: { email: email },
+        relations: ['opportunities'],
+        where: { email: emailInput },
+      });
+    }
+
+    if (!result) {
+      throw new NotFoundException('No Contact with given credentials exist');
+    }
+    // eslint-disable-next-line prettier/prettier
+    const {id, name, email, account, address, title, mobilePhone, workPhone, opportunities} = result;
+    const contactObj: GetContact = {
+      // eslint-disable-next-line prettier/prettier
+      contact: {id, name, email, account, address, title, mobilePhone, workPhone},
+      opportunities: this.convertToGraphqlObject(opportunities),
+    };
+    return contactObj;
+  }
+
+  public async findContact(
+    nameInput: string = undefined,
+    emailInput: string = undefined,
+  ): Promise<Contact> {
+    let result: Contact;
+    if (nameInput) {
+      result = await this.contactRepository.findOne({
+        where: { name: nameInput },
+      });
+    } else if (emailInput) {
+      result = await this.contactRepository.findOne({
+        where: { email: emailInput },
       });
     }
 

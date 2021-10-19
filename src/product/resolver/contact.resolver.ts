@@ -2,6 +2,7 @@ import { Args, Mutation, Query, Resolver } from '@nestjs/graphql';
 import {
   Contact,
   CreateContact,
+  GetContact,
   UpdateContact,
 } from '../../schema/graphql.schema';
 import { ContactService } from '../service/contact.service';
@@ -11,18 +12,20 @@ export class ContactResolver {
   constructor(private readonly contactService: ContactService) {}
 
   @Query()
-  getContactByName(
+  async getContactByName(
     @Args('name')
     name: string,
-  ): Promise<Contact> {
-    return this.contactService.getContactByName(name);
+  ): Promise<GetContact> {
+    const data = await this.contactService.getContactByName(name);
+    console.log(data);
+    return data;
   }
 
   @Query()
   getContactByEmail(
     @Args('email')
     email: string,
-  ): Promise<Contact> {
+  ): Promise<GetContact> {
     return this.contactService.getContactByEmail(email);
   }
 
@@ -43,5 +46,13 @@ export class ContactResolver {
     updateContactInput: UpdateContact,
   ): Promise<Contact> {
     return this.contactService.updateContact(email, updateContactInput);
+  }
+
+  @Mutation()
+  deleteContact(
+    @Args('email')
+    email: string,
+  ): Promise<boolean> {
+    return this.contactService.deleteContact(email);
   }
 }
