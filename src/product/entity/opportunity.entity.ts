@@ -4,12 +4,15 @@ import {
   JoinTable,
   ManyToMany,
   PrimaryGeneratedColumn,
+  Unique,
 } from 'typeorm';
 import { Risk } from '../../schema/graphql.schema';
 import { BaseEntity } from './base.entity';
 import { Contact } from './contact.entity';
 
 @Entity()
+@Unique('opportunity_name_key', ['name'])
+@Unique('opportunity_account_key', ['account'])
 export class Opportunity extends BaseEntity {
   @PrimaryGeneratedColumn('uuid')
   id!: string;

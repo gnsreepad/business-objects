@@ -2,13 +2,15 @@ import {
   Column,
   Entity,
   ManyToMany,
-  OneToMany,
   PrimaryGeneratedColumn,
+  Unique,
 } from 'typeorm';
 import { BaseEntity } from './base.entity';
 import { Opportunity } from './opportunity.entity';
 
 @Entity()
+@Unique('contact_name_key', ['name'])
+@Unique('contact_email_key', ['email'])
 export class Contact extends BaseEntity {
   @PrimaryGeneratedColumn('uuid')
   id!: string;
