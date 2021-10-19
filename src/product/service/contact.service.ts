@@ -6,7 +6,7 @@ import { Contact } from '../entity/contact.entity';
 import { Opportunity } from '../entity/opportunity.entity';
 
 @Injectable()
-export class ContactSercie {
+export class ContactService {
   constructor(
     @InjectRepository(Contact)
     private readonly contactRepository: Repository<Contact>,
@@ -18,8 +18,9 @@ export class ContactSercie {
     return this.findContact(name, undefined);
   }
 
-  getContactByEmail(email: string): Promise<Contact> {
-    return this.findContact(undefined, email);
+  async getContactByEmail(email: string): Promise<Contact> {
+    const contact = await this.findContact(undefined, email);
+    return contact;
   }
 
   async createContact(createContactInput: CreateContact): Promise<Contact> {

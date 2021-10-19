@@ -74,6 +74,7 @@ export interface IMutation {
     updateContact(email: string, updateContactInput?: Nullable<UpdateContact>): Contact | Promise<Contact>;
     createOpportunity(createOpportunityInput: CreateOpportunity): Opportunity | Promise<Opportunity>;
     updateOpportunity(account: string, updateOpportunityInput: UpdateOpportunity): Opportunity | Promise<Opportunity>;
+    addContact(opportunityAccount: string, contactEmailList: string): Opportunity | Promise<Opportunity>;
 }
 
 export interface Opportunity {
@@ -85,7 +86,7 @@ export interface Opportunity {
     closeDate?: Nullable<string>;
     estimatedRevenue?: Nullable<string>;
     riskLevel?: Nullable<Risk>;
-    contactList?: Nullable<Nullable<Contact>[]>;
+    contacts?: Nullable<Nullable<Contact>[]>;
 }
 
 type Nullable<T> = T | null;

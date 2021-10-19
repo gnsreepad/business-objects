@@ -4,11 +4,11 @@ import {
   CreateContact,
   UpdateContact,
 } from '../../schema/graphql.schema';
-import { ContactSercie } from '../service/contact.service';
+import { ContactService } from '../service/contact.service';
 
 @Resolver('Contact')
 export class ContactResolver {
-  constructor(private readonly contactService: ContactSercie) {}
+  constructor(private readonly contactService: ContactService) {}
 
   @Query()
   getContactByName(

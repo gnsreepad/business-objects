@@ -26,9 +26,10 @@ export class OpportunityResolver {
     @Args('account')
     account: string,
   ): Promise<Opportunity> {
-    const opportunity = await this.opportunityService.getOpportunityByName(
+    const opportunity = await this.opportunityService.getOpportunityByAccount(
       account,
     );
+    console.log('opportunity', opportunity);
     return this.convertToGraphqlObject(opportunity);
   }
 
@@ -57,9 +58,24 @@ export class OpportunityResolver {
     return this.convertToGraphqlObject(opportunity);
   }
 
+  @Mutation()
+  async addContact(
+    @Args('opportunityAccount')
+    opportunityAccount: string,
+    @Args('contactEmailList')
+    contactEmailList: string,
+  ): Promise<Opportunity> {
+    const opportunity = await this.opportunityService.addContact(
+      opportunityAccount,
+      contactEmailList,
+    );
+    console.log('opportunity', opportunity);
+    return this.convertToGraphqlObject(opportunity);
+  }
+
   private convertToGraphqlObject(opportunity): Opportunity {
     const convertedOpp: any = opportunity;
-    convertedOpp.closeDate = convertedOpp.closeDate.toDateString();
+    convertedOpp.closeDate = opportunity.closeDate.toString();
     return convertedOpp;
   }
 }
