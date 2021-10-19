@@ -11,8 +11,8 @@ export class CustomExceptionsFilter implements GqlExceptionFilter {
     const contextType = host.getType();
     const statusCode =
       exception instanceof HttpException
-        ? exception.getStatus()
-        : exception.CODE || 'INTERNAL_SERVER_ERROR';
+        ? 'INTERNAL_SERVER_ERROR' || exception.getStatus()
+        : exception.statusCode || 'INTERNAL_SERVER_ERROR';
 
     const message =
       typeof exception.message === 'string'

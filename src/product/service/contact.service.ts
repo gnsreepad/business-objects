@@ -15,11 +15,11 @@ export class ContactSercie {
   ) {}
 
   getContactByName(name: string): Promise<Contact> {
-    return this.findContact((name = name));
+    return this.findContact(name, undefined);
   }
 
   getContactByEmail(email: string): Promise<Contact> {
-    return this.findContact((email = email));
+    return this.findContact(undefined, email);
   }
 
   async createContact(createContactInput: CreateContact): Promise<Contact> {
@@ -56,6 +56,8 @@ export class ContactSercie {
     name: string = undefined,
     email: string = undefined,
   ): Promise<Contact> {
+    // console.log('name', name);
+    // console.log('email', email);
     let result: Contact;
     if (name) {
       result = await this.contactRepository.findOne({
@@ -63,7 +65,7 @@ export class ContactSercie {
       });
     } else if (email) {
       result = await this.contactRepository.findOne({
-        where: { name: name },
+        where: { email: email },
       });
     }
 

@@ -1,14 +1,14 @@
 import { MigrationInterface, QueryRunner } from 'typeorm';
 
-export class InitailMigrations1634584260140 implements MigrationInterface {
-  name = 'InitailMigrations1634584260140';
+export class InitailMigrations1634628541800 implements MigrationInterface {
+  name = 'InitailMigrations1634628541800';
 
   public async up(queryRunner: QueryRunner): Promise<void> {
     await queryRunner.query(
-      `CREATE TABLE "opportunity" ("deleted_at" TIMESTAMP, "created_at" TIMESTAMP NOT NULL DEFAULT now(), "updated_at" TIMESTAMP NOT NULL DEFAULT now(), "id" uuid NOT NULL DEFAULT uuid_generate_v4(), "name" character varying NOT NULL, "account" character varying NOT NULL, "win_percentage" numeric(5,2) NOT NULL DEFAULT '0', "primary_contact" character varying, "close_date" TIMESTAMP, "estimated_revenue" character varying, "risk_level" character varying, CONSTRAINT "PK_085fd6d6f4765325e6c16163568" PRIMARY KEY ("id"))`,
+      `CREATE TABLE "opportunity" ("deleted_at" TIMESTAMP, "created_at" TIMESTAMP NOT NULL DEFAULT now(), "updated_at" TIMESTAMP NOT NULL DEFAULT now(), "id" uuid NOT NULL DEFAULT uuid_generate_v4(), "name" character varying NOT NULL, "account" character varying NOT NULL, "win_percentage" numeric(5,2) NOT NULL DEFAULT '0', "primary_contact" character varying, "close_date" TIMESTAMP, "estimated_revenue" character varying, "risk_level" character varying, CONSTRAINT "opportunity_account_key" UNIQUE ("account"), CONSTRAINT "opportunity_name_key" UNIQUE ("name"), CONSTRAINT "PK_085fd6d6f4765325e6c16163568" PRIMARY KEY ("id"))`,
     );
     await queryRunner.query(
-      `CREATE TABLE "contact" ("deleted_at" TIMESTAMP, "created_at" TIMESTAMP NOT NULL DEFAULT now(), "updated_at" TIMESTAMP NOT NULL DEFAULT now(), "id" uuid NOT NULL DEFAULT uuid_generate_v4(), "name" character varying NOT NULL, "email" character varying NOT NULL, "account" character varying NOT NULL, "address" character varying NOT NULL, "title" character varying, "work_phone" character varying, "mobile_phone" character varying, CONSTRAINT "PK_2cbbe00f59ab6b3bb5b8d19f989" PRIMARY KEY ("id"))`,
+      `CREATE TABLE "contact" ("deleted_at" TIMESTAMP, "created_at" TIMESTAMP NOT NULL DEFAULT now(), "updated_at" TIMESTAMP NOT NULL DEFAULT now(), "id" uuid NOT NULL DEFAULT uuid_generate_v4(), "name" character varying NOT NULL, "email" character varying NOT NULL, "account" character varying NOT NULL, "address" character varying NOT NULL, "title" character varying, "work_phone" character varying, "mobile_phone" character varying, CONSTRAINT "contact_email_key" UNIQUE ("email"), CONSTRAINT "contact_name_key" UNIQUE ("name"), CONSTRAINT "PK_2cbbe00f59ab6b3bb5b8d19f989" PRIMARY KEY ("id"))`,
     );
     await queryRunner.query(
       `CREATE TABLE "opp_contact" ("opportunity_id" uuid NOT NULL, "contact_id" uuid NOT NULL, CONSTRAINT "PK_22185b1995316f95bb14d10efe9" PRIMARY KEY ("opportunity_id", "contact_id"))`,
