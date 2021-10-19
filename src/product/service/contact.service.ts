@@ -1,14 +1,17 @@
-import { ConsoleLogger, Injectable, NotFoundException } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { CreateContact, UpdateContact } from '../../schema/graphql.schema';
 import { Contact } from '../entity/contact.entity';
+import { Opportunity } from '../entity/opportunity.entity';
 
 @Injectable()
 export class ContactSercie {
   constructor(
     @InjectRepository(Contact)
     private readonly contactRepository: Repository<Contact>,
+    @InjectRepository(Contact)
+    private readonly opportunityRepository: Repository<Opportunity>,
   ) {}
 
   getContactByName(name: string): Promise<Contact> {
@@ -35,6 +38,18 @@ export class ContactSercie {
     editContact.id = currentContact.id;
     const contact = await this.contactRepository.save(editContact);
     return contact;
+  }
+
+  async addOpportunity(email: string) {
+    const opp = {
+      name: 'hai',
+      account: 'acc',
+    };
+    const newOpp = this.opportunityRepository.create(opp);
+    const contact = await this.getContactByEmail(email);
+    contact.opportunities = [newOpp];
+    const savedcontact = await this.contactRepository.save(contact);
+    return savedcontact;
   }
 
   private async findContact(
