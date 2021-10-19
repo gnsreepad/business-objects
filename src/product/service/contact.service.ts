@@ -1,6 +1,6 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
+import { getManager, Repository } from 'typeorm';
 import {
   CreateContact,
   GetContact,
@@ -56,6 +56,17 @@ export class ContactService {
   // }
 
   async deleteContact(email: string) {
+    console.log('Delete Started');
+    const manager = getManager();
+    const contact = await this.findContact(undefined, email);
+    console.log('contact', contact);
+    await manager
+      .createQueryBuilder()
+      .delete()
+      .from('opp_contact')
+      .where('contact_id = :contact_id', { contact_id: contact.id })
+      .execute();
+
     await this.contactRepository.delete({ email: email });
     return true;
   }
