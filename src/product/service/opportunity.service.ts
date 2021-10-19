@@ -104,4 +104,9 @@ export class OpportunityService {
     const newOpportunity = await this.opportunityRepository.save(opportunity);
     return newOpportunity;
   }
+
+  async deleteOpportunity(opportunityAccount: string) {
+    await this.opportunityRepository.delete({ account: opportunityAccount });
+    return true;
+  }
 }

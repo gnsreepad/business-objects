@@ -88,6 +88,14 @@ export class OpportunityResolver {
     return this.convertToGraphqlObject(opportunity);
   }
 
+  @Mutation()
+  deleteOpportunity(
+    @Args('opportunityAccount')
+    opportunityAccount: string,
+  ): Promise<boolean> {
+    return this.opportunityService.deleteOpportunity(opportunityAccount);
+  }
+
   private convertToGraphqlObject(opportunity): Opportunity {
     const convertedOpp: any = opportunity;
     convertedOpp.closeDate = opportunity.closeDate.toString();

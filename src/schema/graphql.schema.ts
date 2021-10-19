@@ -76,6 +76,7 @@ export interface IMutation {
     updateOpportunity(account: string, updateOpportunityInput: UpdateOpportunity): Opportunity | Promise<Opportunity>;
     addContact(opportunityAccount: string, contactEmail: string): Opportunity | Promise<Opportunity>;
     addPrimaryContact(opportunityAccount: string, primaryContactEmail: string): Opportunity | Promise<Opportunity>;
+    deleteOpportunity(opportunityAccount: string): boolean | Promise<boolean>;
 }
 
 export interface Opportunity {
