@@ -84,7 +84,6 @@ export class OpportunityResolver {
       opportunityAccount,
       primaryContactEmail,
     );
-    console.log('opportunity', opportunity);
     return this.convertToGraphqlObject(opportunity);
   }
 
