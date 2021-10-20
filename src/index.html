@@ -133,8 +133,17 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 	document.getElementById('CreateContact').onsubmit = function() { 
 	var formData = Array.from(document.querySelectorAll('#CreateContact input')).reduce((acc, input) => ({...acc, [input.id]: input.value}), {});
     console.log(formData);
+	const createContactInput = {
+		name: formData.name,
+		account: formData.account,
+    	address: formData.address,
+    	title: formData.title,
+    	workPhone: formData.workPhone.toString(),
+    	mobilePhone: formData.mobilePhone.toString(),
+    	email: formData.email
+	}
 	try {
-	response = sendRequest(createContact());
+	response = sendRequest(createContact(createContactInput));
 	console.log(response);
 	} catch (err) {
 		console.log(err);
@@ -142,7 +151,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 	document.getElementById('tablename').innerText = formData.name;
 	console.log('Data');
 	return false;
-};
+}
 </script>
 </body>
 </html>
