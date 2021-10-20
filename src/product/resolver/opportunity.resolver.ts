@@ -79,12 +79,12 @@ export class OpportunityResolver {
     opportunityAccount: string,
     @Args('primaryContactEmail')
     primaryContactEmail: string,
-  ): Promise<Opportunity> {
-    const opportunity = await this.opportunityService.addPrimaryContact(
+  ): Promise<boolean> {
+    const success = await this.opportunityService.addPrimaryContact(
       opportunityAccount,
       primaryContactEmail,
     );
-    return this.convertToGraphqlObject(opportunity);
+    return success;
   }
 
   @Mutation()

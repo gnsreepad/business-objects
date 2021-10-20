@@ -105,16 +105,23 @@ export class OpportunityService {
   async addPrimaryContact(
     opportunityAccount: string,
     contactEmail: string,
-  ): Promise<Opportunity> {
+  ): Promise<boolean> {
     const contact: Contact = await this.contactService.findContact(
       undefined,
       contactEmail,
     );
     console.log('contact', contact);
     const opportunity = await this.getOpportunityByAccount(opportunityAccount);
+    const contactInOpportunity: string[] = opportunity.contacts.map(
+      (item) => item.email,
+    );
+    console.log('contact list of opp', contactInOpportunity);
+    if (!contactInOpportunity.includes(contactEmail)) {
+      return false;
+    }
     opportunity.primaryContact = contactEmail;
-    const newOpportunity = await this.opportunityRepository.save(opportunity);
-    return newOpportunity;
+    await this.opportunityRepository.save(opportunity);
+    return true;
   }
 
   async deleteOpportunity(opportunityAccount: string) {
