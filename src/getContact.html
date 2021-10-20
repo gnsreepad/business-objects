@@ -18,6 +18,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 <!-- web font -->
 <!-- <link href="//fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i" rel="stylesheet"> -->
 <!-- //web font -->
+<script type = "text/javascript" src="./../request.js"></script> 
 </head>
 <body>
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
@@ -32,7 +33,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                 <a class="nav-link active" aria-current="page" href="./index.html">Home</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="./getContact.html">Find Contact</a>
+                <a class="nav-link" href="#">Features</a>
               </li>
               <li class="nav-item">
                 <a class="nav-link" href="#">Pricing</a>
@@ -46,17 +47,12 @@ License URL: http://creativecommons.org/licenses/by/3.0/
       </nav>
 	<!-- main -->
 	<div class="main-w3layouts wrapper">
-		<h1>Create Contact</h1>
+		<h1>Find Contact</h1>
 		<div class="main-agileinfo">
 			<div class="agileits-top">
-				<form action="" method="post" id="CreateContact">
+				
 					<input class="text" type="text" name="Username" id="name" placeholder="Username" required="">
-					<input class="text email" type="email" name="email" id="email" placeholder="Email" required="">
-					<input class="text" type="text" name="account" id="account" placeholder="Account" required="">
-					<input class="text" type="text" name="title" id="title" placeholder="Title" required="">
-					<input class="text" type="text" name="address" id="address" placeholder="Address" required="">
-					<input class="text" type="tel" name="workPhone" id="workPhone" placeholder="Work Phone" pattern="^(?:(?:\+|0{0,2})91(\s*[\-]\s*)?|[0]?)?[789]\d{9}$" required="">
-					<input class="text" type="tel" name="mobilePhone" id="mobilePhone" placeholder="Mobile Phone" pattern="^(?:(?:\+|0{0,2})91(\s*[\-]\s*)?|[0]?)?[789]\d{9}$" required="">
+					
 					<div class="wthree-text">
 						<!-- <label class="anim">
 							<input type="checkbox" class="checkbox" required="">
@@ -64,9 +60,8 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 						</label> -->
 						<div class="clear"> </div>
 					</div>
-					<!-- <input type="submit" value="CREATE"> -->
-				</form>
-				<button type="onclick" onclick="createContactRequest()">Find</button>
+					<button type="onclick" onclick="contactByName()">Find</button>
+				
 				<!-- <p>Don't have an Account? <a href="#"> Login Now!</a></p> -->
 			</div>
 		</div>
@@ -124,15 +119,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 <script type = "text/javascript" src="./../home.api.js"></script> 
 <script type = "text/javascript" src="./../contact/query.js"></script> 
 <script type = "text/javascript" src="./../contact/mutations.js"></script> 
-<script type = "text/javascript" src="./../request.js"></script> 
-<script>
-	// function actOnSubmit() {
-	// 	alert('Function Called');
-	// 	var formData = Array.from(document.querySelectorAll('#CreateContact input')).reduce((acc, input) => ({...acc, [input.id]: input.value}), {});
-	// 	console.log(formData);
-	// }
 
-	// document.getElementById('CreateContact').onsubmit = createContactRequest();
-</script>
+
 </body>
 </html>

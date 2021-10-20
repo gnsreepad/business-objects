@@ -2,7 +2,8 @@ const createContact = (createContactInput) => {
     const data = JSON.stringify({
         query: `mutation($createContactInput: CreateContact) {
             createContact(createContactInput: $createContactInput){
-              id
+              id,
+              name,
             }
           }`,
           variables: {
@@ -11,6 +12,7 @@ const createContact = (createContactInput) => {
     });
     return data;
 }
+
 const getContactByName = (name) => {
     const data = JSON.stringify({
         query: `query($name: String!){
@@ -30,4 +32,5 @@ const getContactByName = (name) => {
             name
           }
       });
+      return data;
 }
