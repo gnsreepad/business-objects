@@ -263,14 +263,70 @@ function linkContact() {
       )
       .then(response => response.json())
       .then(result => {
-        console.log(result)
-        console.log(result.data)
-        console.log(result.data.addContact)
+          console.log('result', result)
+        try {
+            if (result?.errors[0].message){
+                console.log('inside null')
+                document.getElementById("linkcontact").innerHTML = result.errors[0].message
+            }} catch {
         if(result?.data?.addContact?.id){
           document.getElementById("linkcontact").innerHTML = "Linked Contact to Opportunity";
         } else {
           document.getElementById("linkcontact").innerHTML = "Failed Linking"
         }
+    }
+      })
+      .catch(function (err) {
+        console.log(err);
+      });
+	
+	console.log('Data');
+	return false;
+}
+
+
+function linkPrimaryContact() { 
+	// @ts-ignore
+	const account = document.getElementById('opportunityAccount').value
+    // @ts-ignore
+    const email = document.getElementById('primaryContactEmail').value
+    console.log(account);
+	
+	const data = addPrimaryContact(account, email);
+    fetch(
+        'http://localhost:5000/sales-force/api/graphql',
+        {
+          method: 'post',
+          body: data,
+          // @ts-ignore
+          headers: {
+            'Content-Type': 'application/json',
+            'Content-Length': data.length,
+            Authorization:
+              'Apikey DONOTSENDAPIKEYS',
+          },
+        }
+      )
+      .then(response => response.json())
+      .then(result => {
+        console.log(result);
+        try {
+        if (result?.errors[0].message){
+            console.log('inside null')
+            document.getElementById("primaryAdded").innerHTML = result.errors[0].message
+        }} catch {
+        if(result?.data?.addPrimaryContact){
+          document.getElementById("primaryAdded").innerHTML = "Added Primary Contact to Opportunity";
+        } else {
+          document.getElementById("primaryAdded").innerHTML = "Failed Adding Primary Contact"
+        }
+    }
+  
+        
+
+        
+
+
       })
       .catch(function (err) {
         console.log(err);
