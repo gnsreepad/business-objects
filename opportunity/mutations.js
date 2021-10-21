@@ -1,7 +1,7 @@
 const createOpportunity = (createOpportunityInput) => {
     const data = JSON.stringify({
-        query: `mutation($createOpportunityInput: CreateOpportunity) {
-            createOpportunity(createOpportunityInput: $createOpportunityInput){
+        query: `mutation($createOpportunityInput: CreateOpportunity!) {
+          createOpportunity(createOpportunityInput: $createOpportunityInput){
                 id,
                 estimatedRevenue,
                 closeDate,
@@ -17,7 +17,7 @@ const createOpportunity = (createOpportunityInput) => {
 
 const updateOpportunity = (account, updateOpportunityInput) => {
     const data = JSON.stringify({
-        query: `mutation($account: String, $updateOpportunityInput: UpdateOpportunity) {
+        query: `mutation($account: String!, $updateOpportunityInput: UpdateOpportunity!) {
             updateOpportunity(account: $account, updateOpportunityInput: $updateOpportunityInput){
                 id,
             }
