@@ -34,7 +34,7 @@ const updateContact = (email, updateContactInput) => {
 
 const deleteContact = (email) => {
   const data = JSON.stringify({
-      query: `mutation($email: String) {
+      query: `mutation($email: String!) {
         deleteContact(email: $email)
       }`,
         variables: {

@@ -149,3 +149,43 @@ function contactByEmail() {
 	console.log('Data');
 	return false;
 }
+
+
+
+
+
+function deleteContactRequest() { 
+	// @ts-ignore
+	const email = document.getElementById('emailDelete').value
+    console.log(email);
+	
+	const data = deleteContact(email);
+    fetch(
+        'http://localhost:5000/sales-force/api/graphql',
+        {
+          method: 'post',
+          body: data,
+          // @ts-ignore
+          headers: {
+            'Content-Type': 'application/json',
+            'Content-Length': data.length,
+            Authorization:
+              'Apikey DONOTSENDAPIKEYS',
+          },
+        }
+      )
+      .then(response => response.json())
+      .then(result => {
+        if(result?.data?.deleteContact){
+          document.getElementById("isDeleted").innerHTML = "Delete Successful";
+        } else {
+          document.getElementById("isDeleted").innerHTML = "Delete Failed"
+        }
+      })
+      .catch(function (err) {
+        console.log(err);
+      });
+	
+	console.log('Data');
+	return false;
+}
