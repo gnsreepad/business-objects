@@ -33,7 +33,7 @@ const updateOpportunity = (account, updateOpportunityInput) => {
 
 const deleteOpportunity = (opportunityAccount) => {
     const data = JSON.stringify({
-        query: `mutation($opportunityAccount: String) {
+        query: `mutation($opportunityAccount: String!) {
             deleteOpportunity(opportunityAccount: $opportunityAccount)
           }`,
           variables: {

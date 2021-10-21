@@ -196,3 +196,42 @@ function opportunityByAccount() {
 	console.log('Data');
 	return false;
 }
+
+function deleteOpportunityRequest() { 
+	// @ts-ignore
+	const account = document.getElementById('accountDelete').value
+    console.log(account);
+	
+	const data = deleteOpportunity(account);
+    fetch(
+        'http://localhost:5000/sales-force/api/graphql',
+        {
+          method: 'post',
+          body: data,
+          // @ts-ignore
+          headers: {
+            'Content-Type': 'application/json',
+            'Content-Length': data.length,
+            Authorization:
+              'Apikey DONOTSENDAPIKEYS',
+          },
+        }
+      )
+      .then(response => response.json())
+      .then(result => {
+        console.log(result)
+        console.log(result.data)
+        console.log(result.data.deleteOpportunity)
+        if(result?.data?.deleteOpportunity){
+          document.getElementById("isDeletedO").innerHTML = "Delete Successful";
+        } else {
+          document.getElementById("isDeletedO").innerHTML = "Delete Failed"
+        }
+      })
+      .catch(function (err) {
+        console.log(err);
+      });
+	
+	console.log('Data');
+	return false;
+}
