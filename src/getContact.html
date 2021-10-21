@@ -30,17 +30,21 @@ License URL: http://creativecommons.org/licenses/by/3.0/
           <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav">
               <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="./index.html">Home</a>
+                <a class="nav-link active" aria-current="page" href="./index.html">Create Contact</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="#">Features</a>
+                <a class="nav-link" href="./getContact.html">Find Contact</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="#">Pricing</a>
+                <a class="nav-link" href="./createOpportunity.html">Create Opportunity</a>
               </li>
-              <li class="nav-item">
-                <a class="nav-link disabled">Disabled</a>
+			  <li class="nav-item">
+                <a class="nav-link" href="./getOpportunity.html">Find Opportunity</a>
               </li>
+			  <li class="nav-item">
+                <a class="nav-link" href="./addContact.html">Link Contact</a>
+              </li>
+              
             </ul>
           </div>
         </div>
@@ -84,14 +88,10 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 					  <!-- <tr>
 						<th scope="row">2</th>
 						<td>Jacob</td>
-						<td>Thornton</td>
-						<td>@fat</td>
 					  </tr>
 					  <tr>
 						<th scope="row">3</th>
 						<td>Larry</td>
-						<td>the Bird</td>
-						<td>@twitter</td>
 					  </tr> -->
 					</tbody>
 				  </table>
@@ -102,6 +102,51 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 			<p>© 2018 Colorlib Signup Form. All rights reserved | Design by <a href="https://colorlib.com/" target="_blank">Colorlib</a></p>
 		</div> -->
 		<!-- //copyright -->
+		<div class="main-agileinfo">
+			<div class="agileits-top">
+				
+				<input class="text email" type="email" name="email" id="email" placeholder="Email" required="">
+					
+					<div class="wthree-text">
+						<!-- <label class="anim">
+							<input type="checkbox" class="checkbox" required="">
+							<span>I Agree To The Terms & Conditions</span>
+						</label> -->
+						<div class="clear"> </div>
+					</div>
+					<button type="onclick" onclick="contactByEmail()">Find</button>
+				
+				<!-- <p>Don't have an Account? <a href="#"> Login Now!</a></p> -->
+			</div>
+		</div>
+
+		<div class="main-agileinfo">
+			<div class="agileits-top">
+				<p id="demo">Your Result</p>
+				<table class="table table-striped">
+					<thead>
+					  <tr>
+						<th scope="col">Key</th>
+						<th scope="col">Value</th>
+					  </tr>
+					</thead>
+					<tbody>
+					  <tr>
+						<th scope="row">Username</th>
+						<td id="tablename"></td>
+					  </tr>
+					  <!-- <tr>
+						<th scope="row">2</th>
+						<td>Jacob</td>
+					  </tr>
+					  <tr>
+						<th scope="row">3</th>
+						<td>Larry</td>
+					  </tr> -->
+					</tbody>
+				  </table>
+			</div>
+		</div>
 		<ul class="colorlib-bubbles">
 			<li></li>
 			<li></li>
@@ -116,6 +161,39 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 		</ul>
 	</div>
 	<!-- //main -->
+	<div class="main-w3layouts wrapper">
+		<h1>Delete Contact</h1>
+		<div class="main-agileinfo">
+			<div class="agileits-top">
+				
+				<input class="text email" type="email" name="email" id="emailDelete" placeholder="Email" required="">
+					
+					<div class="wthree-text">
+						<!-- <label class="anim">
+							<input type="checkbox" class="checkbox" required="">
+							<span>I Agree To The Terms & Conditions</span>
+						</label> -->
+						<div class="clear"> </div>
+					</div>
+					<button type="onclick" onclick="contactByName()">Find</button>
+				
+				<!-- <p>Don't have an Account? <a href="#"> Login Now!</a></p> -->
+			</div>
+		</div>
+
+		<ul class="colorlib-bubbles">
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+		</ul>
+	</div>
 <script type = "text/javascript" src="./../home.api.js"></script> 
 <script type = "text/javascript" src="./../contact/query.js"></script> 
 <script type = "text/javascript" src="./../contact/mutations.js"></script> 
