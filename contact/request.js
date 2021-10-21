@@ -195,26 +195,28 @@ function deleteContactRequest() {
 
 function updateContactRequest() { 
 	// @ts-ignore
-	const formData = Array.from(document.querySelectorAll('#CreateContact input')).reduce((acc, input) => ({...acc, [input.id]: input.value}), {});
+	const formData = Array.from(document.querySelectorAll('#UpdateContact input')).reduce((acc, input) => ({...acc, [input.id]: input.value}), {});
     console.log(formData);
-	const createContactInput = {
+	const updateContactInput = {
 		// @ts-ignore
-		name: formData.name,
+		name: formData.Uname,
 		// @ts-ignore
-		account: formData.account,
+		account: formData.Uaccount,
     	// @ts-ignore
-    	address: formData.address,
+    	address: formData.Uaddress,
     	// @ts-ignore
-    	title: formData.title,
+    	title: formData.Utitle,
     	// @ts-ignore
-    	workPhone: formData.workPhone.toString(),
+    	workPhone: formData.UworkPhone.toString(),
     	// @ts-ignore
-    	mobilePhone: formData.mobilePhone.toString(),
+    	mobilePhone: formData.UmobilePhone.toString(),
     	// @ts-ignore
 	}
-	const email = document.getElementById("updateEmail");
+	// @ts-ignore
+	const email = formData.updateEmail;
+  console.log(email)
 
-	const data = updateContact(email, createContactInput);
+	const data = updateContact(email, updateContactInput);
     fetch(
         'http://localhost:5000/sales-force/api/graphql',
         {
@@ -232,7 +234,7 @@ function updateContactRequest() {
 	.then(response => response.json())
     .then(result => {
         // console.log(result);
-        document.getElementById('updatePara').innerHTML = result?.data?.updateContact?.id || 'Unable to Update Contact';
+        document.getElementById('updatePara').innerHTML = (result?.data?.updateContact?.id) ? "Contact Updated" : 'Unable to Update Contact';
     })
     .catch(function (err) {
         console.log(err);

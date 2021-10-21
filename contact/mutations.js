@@ -16,7 +16,7 @@ const createContact = (createContactInput) => {
 
 const updateContact = (email, updateContactInput) => {
   const data = JSON.stringify({
-      query: `mutation($email: String, $updateContactInput: UpdateContact){
+      query: `mutation($email: String!, $updateContactInput: UpdateContact){
         updateContact(email: $email, updateContactInput: $updateContactInput){
           id
         }
