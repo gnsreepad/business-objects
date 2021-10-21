@@ -235,3 +235,47 @@ function deleteOpportunityRequest() {
 	console.log('Data');
 	return false;
 }
+
+
+
+
+function linkContact() { 
+	// @ts-ignore
+	const account = document.getElementById('oppAccount').value
+    // @ts-ignore
+    const email = document.getElementById('contactEmail').value
+    console.log(account);
+	
+	const data = addContact(account, email);
+    fetch(
+        'http://localhost:5000/sales-force/api/graphql',
+        {
+          method: 'post',
+          body: data,
+          // @ts-ignore
+          headers: {
+            'Content-Type': 'application/json',
+            'Content-Length': data.length,
+            Authorization:
+              'Apikey DONOTSENDAPIKEYS',
+          },
+        }
+      )
+      .then(response => response.json())
+      .then(result => {
+        console.log(result)
+        console.log(result.data)
+        console.log(result.data.addContact)
+        if(result?.data?.addContact?.id){
+          document.getElementById("linkcontact").innerHTML = "Linked Contact to Opportunity";
+        } else {
+          document.getElementById("linkcontact").innerHTML = "Failed Linking"
+        }
+      })
+      .catch(function (err) {
+        console.log(err);
+      });
+	
+	console.log('Data');
+	return false;
+}

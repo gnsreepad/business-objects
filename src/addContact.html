@@ -55,7 +55,8 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 		<div class="main-agileinfo">
 			<div class="agileits-top">
 				
-					<input class="text" type="text" name="Username" id="name" placeholder="Username" required="">
+					<input class="text" type="text" name="Username" id="oppAccount" placeholder="Opportunity Account" required="">
+					<input class="text" type="text" name="Username" id="contactEmail" placeholder="Contact Email" required="">
 					
 					<div class="wthree-text">
 						<!-- <label class="anim">
@@ -64,39 +65,14 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 						</label> -->
 						<div class="clear"> </div>
 					</div>
-					<button type="onclick" onclick="contactByName()">Find</button>
+					<button type="onclick" onclick="linkContact()">Link</button>
+					<p id="linkcontact" ></p>
 				
 				<!-- <p>Don't have an Account? <a href="#"> Login Now!</a></p> -->
 			</div>
 		</div>
 
-		<div class="main-agileinfo">
-			<div class="agileits-top">
-				<p id="demo">Your Result</p>
-				<table class="table table-striped">
-					<thead>
-					  <tr>
-						<th scope="col">Key</th>
-						<th scope="col">Value</th>
-					  </tr>
-					</thead>
-					<tbody>
-					  <tr>
-						<th scope="row">Username</th>
-						<td id="tablename"></td>
-					  </tr>
-					  <!-- <tr>
-						<th scope="row">2</th>
-						<td>Jacob</td>
-					  </tr>
-					  <tr>
-						<th scope="row">3</th>
-						<td>Larry</td>
-					  </tr> -->
-					</tbody>
-				  </table>
-			</div>
-		</div>
+		
 		<!-- copyright -->
 		<!-- <div class="colorlibcopy-agile">
 			<p>© 2018 Colorlib Signup Form. All rights reserved | Design by <a href="https://colorlib.com/" target="_blank">Colorlib</a></p>
@@ -122,7 +98,8 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 		<div class="main-agileinfo">
 			<div class="agileits-top">
 				
-				<input class="text" type="text" name="account" id="accountDelete" placeholder="Account" required="">
+				<input class="text" type="text" name="Username" id="opportunityAccount" placeholder="Opportunity Account" required="">
+				<input class="text" type="text" name="Username" id="primaryContactEmail" placeholder="Contact Email" required="">
 					
 					<div class="wthree-text">
 						<!-- <label class="anim">
@@ -132,39 +109,12 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 						<div class="clear"> </div>
 					</div>
 					<button type="onclick" onclick="contactByName()">Find</button>
-				
+					<p id="primaryAdded" ></p>
 				<!-- <p>Don't have an Account? <a href="#"> Login Now!</a></p> -->
 			</div>
 		</div>
 
-        <div class="main-agileinfo">
-			<div class="agileits-top">
-				<p id="demo">Your Result</p>
-				<table class="table table-striped">
-					<thead>
-					  <tr>
-						<th scope="col">Key</th>
-						<th scope="col">Value</th>
-					  </tr>
-					</thead>
-					<tbody>
-					  <tr>
-						<th scope="row">Username</th>
-						<td id="tablename"></td>
-					  </tr>
-					  <!-- <tr>
-						<th scope="row">2</th>
-						<td>Jacob</td>
-					  </tr>
-					  <tr>
-						<th scope="row">3</th>
-						<td>Larry</td>
-					  </tr> -->
-					</tbody>
-				  </table>
-			</div>
-		</div>
-
+        
 		<ul class="colorlib-bubbles">
 			<li></li>
 			<li></li>
@@ -179,9 +129,9 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 		</ul>
 	</div>
 <script type = "text/javascript" src="./../home.api.js"></script> 
-<script type = "text/javascript" src="./../contact/query.js"></script> 
-<script type = "text/javascript" src="./../contact/mutations.js"></script> 
-
+<script type = "text/javascript" src="./../opportunity/mutations.js"></script> 
+<script type = "text/javascript" src="./../opportunity/query.js"></script> 
+<script type = "text/javascript" src="./../opportunity/request.js"></script> 
 
 </body>
 </html>
