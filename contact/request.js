@@ -189,3 +189,53 @@ function deleteContactRequest() {
 	console.log('Data');
 	return false;
 }
+
+
+
+
+function updateContactRequest() { 
+	// @ts-ignore
+	const formData = Array.from(document.querySelectorAll('#CreateContact input')).reduce((acc, input) => ({...acc, [input.id]: input.value}), {});
+    console.log(formData);
+	const createContactInput = {
+		// @ts-ignore
+		name: formData.name,
+		// @ts-ignore
+		account: formData.account,
+    	// @ts-ignore
+    	address: formData.address,
+    	// @ts-ignore
+    	title: formData.title,
+    	// @ts-ignore
+    	workPhone: formData.workPhone.toString(),
+    	// @ts-ignore
+    	mobilePhone: formData.mobilePhone.toString(),
+    	// @ts-ignore
+	}
+	const email = document.getElementById("updateEmail");
+
+	const data = updateContact(email, createContactInput);
+    fetch(
+        'http://localhost:5000/sales-force/api/graphql',
+        {
+          method: 'post',
+          body: data,
+          // @ts-ignore
+          headers: {
+            'Content-Type': 'application/json',
+            'Content-Length': data.length,
+            Authorization:
+              'Apikey DONOTSENDAPIKEYS',
+          },
+        }
+      )
+	.then(response => response.json())
+    .then(result => {
+        // console.log(result);
+        document.getElementById('updatePara').innerHTML = result?.data?.updateContact?.id || 'Unable to Update Contact';
+    })
+    .catch(function (err) {
+        console.log(err);
+      });
+	return false;
+}
