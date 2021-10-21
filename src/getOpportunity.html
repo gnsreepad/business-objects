@@ -64,7 +64,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 						</label> -->
 						<div class="clear"> </div>
 					</div>
-					<button type="onclick" onclick="contactByName()">Find</button>
+					<button type="onclick" onclick="opportunityByName()">Find</button>
 				
 				<!-- <p>Don't have an Account? <a href="#"> Login Now!</a></p> -->
 			</div>
@@ -85,18 +85,53 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 						<th scope="row">Username</th>
 						<td id="tablename"></td>
 					  </tr>
-					  <!-- <tr>
-						<th scope="row">2</th>
-						<td>Jacob</td>
+					  <tr>
+						<th scope="row">winPercentage</th>
+						<td id="winPercentage"></td>
 					  </tr>
 					  <tr>
-						<th scope="row">3</th>
-						<td>Larry</td>
-					  </tr> -->
+						<th scope="row">Account</th>
+						<td id="account"></td>
+					  </tr>
+					  <tr>
+						<th scope="row">primaryContact</th>
+						<td id="primaryContact"></td>
+					  </tr>
+					  <tr>
+						<th scope="row">closeDate</th>
+						<td id="closeDate"></td>
+					  </tr>
+					  <tr>
+						<th scope="row">estimatedRevenue</th>
+						<td id="estimatedRevenue"></td>
+					  </tr>
+					  <tr>
+						<th scope="row">riskLevel</th>
+						<td id="riskLevel"></td>
+					  </tr>
 					</tbody>
 				  </table>
 			</div>
 		</div>
+
+		<div class="main-agileinfo">
+			
+			<div id="dvTable" class="agileits-top">
+				<p id="demo">Opportunity</p>
+				<table class="table table-striped">
+					<thead>
+						<tr>
+						  <th scope="col">No.</th>
+						  <th scope="col">Email</th>
+						  <th scope="col">Name</th>
+						</tr>
+					  </thead>
+					<tbody id="tbody"></tbody>
+				</table>
+				
+			</div>
+		</div>
+		
 		<!-- copyright -->
 		<!-- <div class="colorlibcopy-agile">
 			<p>© 2018 Colorlib Signup Form. All rights reserved | Design by <a href="https://colorlib.com/" target="_blank">Colorlib</a></p>
@@ -105,7 +140,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 		<div class="main-agileinfo">
 			<div class="agileits-top">
 				
-				<input class="text" type="text" name="account" id="account" placeholder="Account" required="">
+				<input class="text" type="text" name="account" id="findaccount" placeholder="Account" required="">
 					
 					<div class="wthree-text">
 						<!-- <label class="anim">
@@ -114,7 +149,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 						</label> -->
 						<div class="clear"> </div>
 					</div>
-					<button type="onclick" onclick="contactByEmail()">Find</button>
+					<button type="onclick" onclick="opportunityByAccount()">Find</button>
 				
 				<!-- <p>Don't have an Account? <a href="#"> Login Now!</a></p> -->
 			</div>
@@ -133,18 +168,52 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 					<tbody>
 					  <tr>
 						<th scope="row">Username</th>
-						<td id="tablename"></td>
-					  </tr>
-					  <!-- <tr>
-						<th scope="row">2</th>
-						<td>Jacob</td>
+						<td id="Atablename"></td>
 					  </tr>
 					  <tr>
-						<th scope="row">3</th>
-						<td>Larry</td>
-					  </tr> -->
+						<th scope="row">winPercentage</th>
+						<td id="AwinPercentage"></td>
+					  </tr>
+					  <tr>
+						<th scope="row">Account</th>
+						<td id="Aaccount"></td>
+					  </tr>
+					  <tr>
+						<th scope="row">primaryContact</th>
+						<td id="AprimaryContact"></td>
+					  </tr>
+					  <tr>
+						<th scope="row">closeDate</th>
+						<td id="AcloseDate"></td>
+					  </tr>
+					  <tr>
+						<th scope="row">estimatedRevenue</th>
+						<td id="AestimatedRevenue"></td>
+					  </tr>
+					  <tr>
+						<th scope="row">riskLevel</th>
+						<td id="AriskLevel"></td>
+					  </tr>
 					</tbody>
 				  </table>
+			</div>
+		</div>
+
+		<div class="main-agileinfo">
+			
+			<div id="dvTable" class="agileits-top">
+				<p id="demo">Opportunity</p>
+				<table class="table table-striped">
+					<thead>
+						<tr>
+						  <th scope="col">No.</th>
+						  <th scope="col">Email</th>
+						  <th scope="col">Name</th>
+						</tr>
+					  </thead>
+					<tbody id="Atbody"></tbody>
+				</table>
+				
 			</div>
 		</div>
 		<ul class="colorlib-bubbles">
@@ -195,9 +264,9 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 		</ul>
 	</div>
 <script type = "text/javascript" src="./../home.api.js"></script> 
-<script type = "text/javascript" src="./../contact/query.js"></script> 
-<script type = "text/javascript" src="./../contact/mutations.js"></script> 
-
+<script type = "text/javascript" src="./../opportunity/query.js"></script> 
+<script type = "text/javascript" src="./../opportunity/mutations.js"></script> 
+<script type = "text/javascript" src="./../opportunity/request.js"></script> 
 
 </body>
 </html>
