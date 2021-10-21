@@ -1,12 +1,43 @@
-const getPageLinks = () => {
-    const data = JSON.stringify({
-        query: `{
-          getPageLinks(pageId: "4605c0a6-8bf3-4a49-a13f-2bd77194cce0"){
-            pageId,
-            title,
-            linkUrl
+const getContactByName = (name) => {
+  const data = JSON.stringify({
+      query: `query($name: String!){
+          getContactByName(name:$name){
+            contact{
+              id,
+              name,
+              account
+            }
+            opportunities {
+              id,
+              name,
+            }
           }
         }`,
-      });
+        variables: {
+          name
+        }
+    });
+    return data;
+}
+
+const getContactByEmail = (email) => {
+  const data = JSON.stringify({
+      query: `query($email: String!){
+          getContactByEmail(email:$email){
+            contact{
+              id,
+              name,
+              account
+            }
+            opportunities {
+              id,
+              name,
+            }
+          }
+        }`,
+        variables: {
+          email
+        }
+    });
     return data;
 }

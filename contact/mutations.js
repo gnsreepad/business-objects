@@ -13,24 +13,33 @@ const createContact = (createContactInput) => {
     return data;
 }
 
-const getContactByName = (name) => {
-    const data = JSON.stringify({
-        query: `query($name: String!){
-            getContactByName(name:$name){
-              contact{
-                id,
-                name,
-                account
-              }
-              opportunities {
-                id,
-                name,
-              }
-            }
-          }`,
-          variables: {
-            name
-          }
-      });
-      return data;
+
+const updateContact = (email, updateContactInput) => {
+  const data = JSON.stringify({
+      query: `mutation($email: String, $updateContactInput: UpdateContact){
+        updateContact(email: $email, updateContactInput: $updateContactInput){
+          id
+        }
+      }`,
+        variables: {
+          email,
+          updateContactInput
+        } 
+  });
+  return data;
+}
+
+
+
+
+const deleteContact = (email) => {
+  const data = JSON.stringify({
+      query: `mutation($email: String) {
+        deleteContact(email: $email)
+      }`,
+        variables: {
+          email
+        } 
+  });
+  return data;
 }

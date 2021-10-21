@@ -42,3 +42,38 @@ const deleteOpportunity = (opportunityAccount) => {
     });
     return data;
 }
+
+
+const addContact = (opportunityAccount, contactEmail) => {
+    const data = JSON.stringify({
+        query: `mutation($opportunityAccount: String, $contactEmail: String){
+            addContact(opportunityAccount:$opportunityAccount, contactEmail: $contactEmail){
+              id,
+              closeDate,
+              contacts {
+                id,
+                name
+              }
+            }
+          }`,
+          variables: {
+            opportunityAccount,
+            contactEmail
+          } 
+    });
+    return data;
+}
+
+const addPrimaryContact = (opportunityAccount, primaryContactEmail) => {
+    const data = JSON.stringify({
+        query: `mutation($opportunityAccount: String, $primaryContactEmail: String){
+            addPrimaryContact(opportunityAccount:$opportunityAccount, primaryContactEmail: $primaryContactEmail)
+        }`,
+          variables: {
+            opportunityAccount,
+            primaryContactEmail
+          } 
+    });
+    return data;
+}
+
