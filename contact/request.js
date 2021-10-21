@@ -1,3 +1,25 @@
+function generateTable(obj, elementid) {
+  var tbody = document.getElementById(elementid);
+
+for (var i = 0; i < obj.length; i++) {
+    var tr = "<tr>";
+
+    /* Verification to add the last decimal 0 */
+    if (obj[i].name.toString().substring(obj[i].name.toString().indexOf('.'), obj[i].name.toString().length) < 2) 
+        obj[i].name += "0";
+
+    /* Must not forget the $ sign */
+    tr += "<td>" + (i+1) + "</td>"+ "<td>" + obj[i].account + "</td>" + "<td>" + obj[i].name.toString() + "</td></tr>";
+
+    /* We add the table row to the table body */
+    tbody.innerHTML += tr;
+}
+}
+
+
+
+
+
 function createContactRequest() { 
 	// @ts-ignore
 	const formData = Array.from(document.querySelectorAll('#CreateContact input')).reduce((acc, input) => ({...acc, [input.id]: input.value}), {});
@@ -70,12 +92,14 @@ function contactByName() {
       .then(result => {
         console.log(result?.data?.getContactByName?.contact?.name);
         document.getElementById('tablename').innerText = result?.data?.getContactByName?.contact?.name || "No contact of this name";
-        document.getElementById('email').innerText = result?.data?.getContactByName?.contact?.email || "No contact of this name";
-        document.getElementById('account').innerText = result?.data?.getContactByName?.contact?.account || "No contact of this name";
-        document.getElementById('title').innerText = result?.data?.getContactByName?.contact?.title || "No contact of this name";
-        document.getElementById('address').innerText = result?.data?.getContactByName?.contact?.address || "No contact of this name";
-        document.getElementById('workPhone').innerText = result?.data?.getContactByName?.contact?.workPhone || "No contact of this name";
-        document.getElementById('mobilePhone').innerText = result?.data?.getContactByName?.contact?.mobilePhone || "No contact of this name";
+        document.getElementById('email').innerText = result?.data?.getContactByName?.contact?.email || "Nil";
+        document.getElementById('account').innerText = result?.data?.getContactByName?.contact?.account || "Nil";
+        document.getElementById('title').innerText = result?.data?.getContactByName?.contact?.title || "Nil";
+        document.getElementById('address').innerText = result?.data?.getContactByName?.contact?.address || "Nil";
+        document.getElementById('workPhone').innerText = result?.data?.getContactByName?.contact?.workPhone || "Nil";
+        document.getElementById('mobilePhone').innerText = result?.data?.getContactByName?.contact?.mobilePhone || "Nil";
+        // document.getElementById('dvTable').innerHTML = result?.data?.getContactByName?.opportunities || "Nil";
+        generateTable(result?.data?.getContactByName?.opportunities, "tbody");
       })
       .catch(function (err) {
         console.log(err);
@@ -110,12 +134,13 @@ function contactByEmail() {
       .then(result => {
         console.log(result?.data?.getContactByEmail?.contact?.name);
         document.getElementById('Etablename').innerText = result?.data?.getContactByEmail?.contact?.name || "No contact of this email";
-        document.getElementById('Eemail').innerText = result?.data?.getContactByEmail?.contact?.email || "No contact of this email";
-        document.getElementById('Eaccount').innerText = result?.data?.getContactByEmail?.contact?.account || "No contact of this email";
-        document.getElementById('Etitle').innerText = result?.data?.getContactByEmail?.contact?.title || "No contact of this email";
-        document.getElementById('Eaddress').innerText = result?.data?.getContactByEmail?.contact?.address || "No contact of this email";
-        document.getElementById('EworkPhone').innerText = result?.data?.getContactByEmail?.contact?.workPhone || "No contact of this email";
-        document.getElementById('EmobilePhone').innerText = result?.data?.getContactByEmail?.contact?.mobilePhone || "No contact of this email";
+        document.getElementById('Eemail').innerText = result?.data?.getContactByEmail?.contact?.email || "Nil";
+        document.getElementById('Eaccount').innerText = result?.data?.getContactByEmail?.contact?.account || "Nil";
+        document.getElementById('Etitle').innerText = result?.data?.getContactByEmail?.contact?.title || "Nil";
+        document.getElementById('Eaddress').innerText = result?.data?.getContactByEmail?.contact?.address || "Nil";
+        document.getElementById('EworkPhone').innerText = result?.data?.getContactByEmail?.contact?.workPhone || "Nil";
+        document.getElementById('EmobilePhone').innerText = result?.data?.getContactByEmail?.contact?.mobilePhone || "Nil";
+        generateTable(result?.data?.getContactByEmail?.opportunities, "Etbody");
       })
       .catch(function (err) {
         console.log(err);

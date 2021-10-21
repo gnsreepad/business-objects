@@ -13,8 +13,8 @@ const getContactByName = (name) => {
               title
             }
             opportunities {
-              id,
               name,
+              account,
             }
           }
         }`,
@@ -40,8 +40,8 @@ const getContactByEmail = (email) => {
               title
             }
             opportunities {
-              id,
               name,
+              account,
             }
           }
         }`,
