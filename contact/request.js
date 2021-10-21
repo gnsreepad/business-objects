@@ -37,7 +37,7 @@ function createContactRequest() {
 	.then(response => response.json())
     .then(result => {
         // console.log(result);
-        document.getElementById('tablename').innerText = result?.data?.createContact?.name || 'No name: failed';
+        document.getElementById('tablename').innerText = result?.data?.createContact?.id || 'Unable to Add Contact';
     })
     .catch(function (err) {
         console.log(err);
