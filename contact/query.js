@@ -5,7 +5,12 @@ const getContactByName = (name) => {
             contact{
               id,
               name,
-              account
+              account,
+              email,
+              address,
+              workPhone,
+              mobilePhone,
+              title
             }
             opportunities {
               id,
@@ -27,7 +32,12 @@ const getContactByEmail = (email) => {
             contact{
               id,
               name,
-              account
+              account,
+              email,
+              address,
+              workPhone,
+              mobilePhone,
+              title
             }
             opportunities {
               id,
