@@ -58,13 +58,33 @@ export class ContactService {
   async deleteContact(email: string) {
     console.log('Delete Started');
     const manager = getManager();
-    const contact = await this.findContact(undefined, email);
-    console.log('contact', contact);
+    const result = await await this.findContactAndOpportunity(undefined, email);
+    console.log('contact', result);
+
+    const listOpportunityId: string[] = result.opportunities.map(
+      (opp) => opp.id,
+    );
+
+    // delete primary contact from
+    listOpportunityId.forEach(async (oppId) => {
+      await manager
+        .createQueryBuilder()
+        .update('opportunity')
+        .set({
+          primaryContact: 'contact deleted',
+        })
+        .where('id = :id', { id: oppId })
+        .andWhere('primary_contact = :primary_contact', {
+          primary_contact: email,
+        })
+        .execute();
+    });
+
     await manager
       .createQueryBuilder()
       .delete()
       .from('opp_contact')
-      .where('contact_id = :contact_id', { contact_id: contact.id })
+      .where('contact_id = :contact_id', { contact_id: result.contact.id })
       .execute();
 
     await this.contactRepository.delete({ email: email });
