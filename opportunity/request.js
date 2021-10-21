@@ -153,3 +153,46 @@ function opportunityByName() {
 	console.log('Data');
 	return false;
 }
+
+
+
+function opportunityByAccount() { 
+	// @ts-ignore
+	const account = document.getElementById('findaccount').value
+    console.log(account);
+	
+	const data = getOpportunityByAccount(account);
+    fetch(
+        'http://localhost:5000/sales-force/api/graphql',
+        {
+          method: 'post',
+          body: data,
+          // @ts-ignore
+          headers: {
+            'Content-Type': 'application/json',
+            'Content-Length': data.length,
+            Authorization:
+              'Apikey DONOTSENDAPIKEYS',
+          },
+        }
+      )
+      .then(response => response.json())
+      .then(result => {
+        console.log(result?.data?.getOpportunityByAccount?.name);
+        document.getElementById('Atablename').innerText = result?.data?.getOpportunityByAccount?.name || "No contact of this name";
+        document.getElementById('AwinPercentage').innerText = result?.data?.getOpportunityByAccount?.winPercentage || "Nil";
+        document.getElementById('Aaccount').innerText = result?.data?.getOpportunityByAccount?.account || "Nil";
+        document.getElementById('AprimaryContact').innerText = result?.data?.getOpportunityByAccount?.primaryContact || "Nil";
+        document.getElementById('AcloseDate').innerText = result?.data?.getOpportunityByAccount?.closeDate || "Nil";
+        document.getElementById('AestimatedRevenue').innerText = result?.data?.getOpportunityByAccount?.estimatedRevenue || "Nil";
+        document.getElementById('AriskLevel').innerText = result?.data?.getOpportunityByAccount?.riskLevel || "Nil";
+        // document.getElementById('dvTable').innerHTML = result?.data?.getContactByName?.opportunities || "Nil";
+        generateTable(result?.data?.getOpportunityByAccount?.contacts, "Atbody");
+      })
+      .catch(function (err) {
+        console.log(err);
+      });
+	
+	console.log('Data');
+	return false;
+}
