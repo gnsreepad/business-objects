@@ -5,11 +5,15 @@ import {
   GetContact,
   UpdateContact,
 } from '../../schema/graphql.schema';
+import { TransactionHelper } from '../helpers/transaction.helper';
 import { ContactService } from '../service/contact.service';
 
 @Resolver('Contact')
 export class ContactResolver {
-  constructor(private readonly contactService: ContactService) {}
+  constructor(
+    private readonly contactService: ContactService,
+    private readonly transactionHelper: TransactionHelper,
+  ) {}
 
   @Query()
   async getContactByName(
@@ -49,10 +53,14 @@ export class ContactResolver {
   }
 
   @Mutation()
-  deleteContact(
+  async deleteContact(
     @Args('email')
     email: string,
   ): Promise<boolean> {
-    return this.contactService.deleteContact(email);
+    const result = await this.transactionHelper.executeTransaction(
+      this.contactService.deleteContact.bind(this.contactService),
+      email,
+    );
+    return result;
   }
 }

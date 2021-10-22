@@ -1,6 +1,6 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { getManager, Repository } from 'typeorm';
+import { Connection, EntityManager, getManager, Repository } from 'typeorm';
 import {
   CreateContact,
   GetContact,
@@ -14,6 +14,7 @@ export class ContactService {
   constructor(
     @InjectRepository(Contact)
     private readonly contactRepository: Repository<Contact>,
+    private readonly connection: Connection,
   ) {}
 
   getContactByName(name: string): Promise<GetContact> {
@@ -55,10 +56,13 @@ export class ContactService {
   //   return savedcontact;
   // }
 
-  async deleteContact(email: string) {
+  async deleteContact(
+    email: string,
+    transactionManager: EntityManager = getManager(this.connection.name),
+  ) {
     console.log('Delete Started');
-    const manager = getManager();
-    const result = await await this.findContactAndOpportunity(undefined, email);
+    // const manager = getManager();
+    const result = await this.findContactAndOpportunity(undefined, email);
     console.log('contact', result);
 
     const listOpportunityId: string[] = result.opportunities.map(
@@ -67,7 +71,7 @@ export class ContactService {
 
     // delete primary contact from
     listOpportunityId.forEach(async (oppId) => {
-      await manager
+      await transactionManager
         .createQueryBuilder()
         .update('opportunity')
         .set({
@@ -80,14 +84,14 @@ export class ContactService {
         .execute();
     });
 
-    await manager
+    await transactionManager
       .createQueryBuilder()
       .delete()
       .from('opp_contact')
       .where('contact_id = :contact_id', { contact_id: result.contact.id })
       .execute();
 
-    await this.contactRepository.delete({ email: email });
+    await transactionManager.delete(Contact, { email: email });
     return true;
   }
 
