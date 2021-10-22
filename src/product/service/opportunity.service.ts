@@ -117,7 +117,7 @@ export class OpportunityService {
     );
     console.log('contact list of opp', contactInOpportunity);
     if (!contactInOpportunity.includes(contactEmail)) {
-      return false;
+      throw new Error('Contact not linked to Opportunity');
     }
     opportunity.primaryContact = contactEmail;
     await this.opportunityRepository.save(opportunity);
