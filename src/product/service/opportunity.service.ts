@@ -5,7 +5,7 @@ import {
   NotFoundException,
 } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
+import { getManager, Repository } from 'typeorm';
 import {
   CreateOpportunity,
   UpdateOpportunity,
@@ -128,6 +128,12 @@ export class OpportunityService {
     return newOpportunity;
   }
 
+  /**
+   * Function to add a primary contact to opportunity
+   * @param opportunityAccount
+   * @param contactEmail
+   * @returns
+   */
   async addPrimaryContact(
     opportunityAccount: string,
     contactEmail: string,
@@ -153,5 +159,15 @@ export class OpportunityService {
   async deleteOpportunity(opportunityAccount: string) {
     await this.opportunityRepository.delete({ account: opportunityAccount });
     return true;
+  }
+
+  async getAllOpportunity() {
+    const manager = getManager();
+    const opportuntiy = await manager
+      .createQueryBuilder()
+      .select('account')
+      .from(Opportunity, 'opportunity')
+      .execute();
+    return opportuntiy;
   }
 }

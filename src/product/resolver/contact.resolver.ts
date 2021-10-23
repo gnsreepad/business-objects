@@ -63,4 +63,9 @@ export class ContactResolver {
     );
     return result;
   }
+
+  @Query()
+  getAllContact() {
+    return this.contactService.getAllContact();
+  }
 }

@@ -100,4 +100,9 @@ export class OpportunityResolver {
     convertedOpp.closeDate = opportunity.closeDate?.toString() || undefined;
     return convertedOpp;
   }
+
+  @Query()
+  getAllOpportunity() {
+    return this.opportunityService.getAllOpportunity();
+  }
 }

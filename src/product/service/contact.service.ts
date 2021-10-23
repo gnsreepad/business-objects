@@ -154,4 +154,14 @@ export class ContactService {
     }
     return result;
   }
+
+  async getAllContact() {
+    const manager = getManager();
+    const contact = await manager
+      .createQueryBuilder()
+      .select('email')
+      .from(Contact, 'contact')
+      .execute();
+    return contact;
+  }
 }

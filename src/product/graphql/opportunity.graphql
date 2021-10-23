@@ -35,11 +35,14 @@ input UpdateOpportunity {
     riskLevel: Risk
 }
 
-
+type GetAccount {
+account: String
+}
 
 type Query {
     getOpportunityByName(name: String!): Opportunity
     getOpportunityByAccount(account: String!): Opportunity
+    getAllOpportunity: [GetAccount]
 }
 
 type Mutation {

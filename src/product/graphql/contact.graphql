@@ -33,9 +33,14 @@ input UpdateContact {
     mobilePhone: String
 }
 
+type GetEmail {
+email: String
+}
+
 type Query {
     getContactByName(name: String!): GetContact
     getContactByEmail(email: String!): GetContact
+    getAllContact: [GetEmail]
 }
 
 type Mutation {

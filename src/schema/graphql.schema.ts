@@ -67,11 +67,17 @@ export interface GetContact {
     opportunities?: Nullable<Nullable<Opportunity>[]>;
 }
 
+export interface GetEmail {
+    email?: Nullable<string>;
+}
+
 export interface IQuery {
     getContactByName(name: string): Nullable<GetContact> | Promise<Nullable<GetContact>>;
     getContactByEmail(email: string): Nullable<GetContact> | Promise<Nullable<GetContact>>;
+    getAllContact(): Nullable<Nullable<GetEmail>[]> | Promise<Nullable<Nullable<GetEmail>[]>>;
     getOpportunityByName(name: string): Nullable<Opportunity> | Promise<Nullable<Opportunity>>;
     getOpportunityByAccount(account: string): Nullable<Opportunity> | Promise<Nullable<Opportunity>>;
+    getAllOpportunity(): Nullable<Nullable<GetAccount>[]> | Promise<Nullable<Nullable<GetAccount>[]>>;
 }
 
 export interface IMutation {
@@ -95,6 +101,10 @@ export interface Opportunity {
     estimatedRevenue?: Nullable<string>;
     riskLevel?: Nullable<Risk>;
     contacts?: Nullable<Nullable<Contact>[]>;
+}
+
+export interface GetAccount {
+    account?: Nullable<string>;
 }
 
 type Nullable<T> = T | null;
