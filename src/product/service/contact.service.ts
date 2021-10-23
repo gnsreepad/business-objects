@@ -17,15 +17,30 @@ export class ContactService {
     private readonly connection: Connection,
   ) {}
 
+  /**
+   * Function to find contact by name
+   * @param name: name of contact
+   * @returns: Contact record
+   */
   getContactByName(name: string): Promise<GetContact> {
     return this.findContactAndOpportunity(name, undefined);
   }
 
+  /**
+   * Function to find contact by email
+   * @param email: email of contact
+   * @returns: Contact record
+   */
   async getContactByEmail(email: string): Promise<GetContact> {
     const contact = await this.findContactAndOpportunity(undefined, email);
     return contact;
   }
 
+  /**
+   * Creates a contact
+   * @param createContactInput: Contact record entries
+   * @returns Created Contact
+   */
   async createContact(createContactInput: CreateContact): Promise<Contact> {
     console.log(createContactInput);
     const newContact = this.contactRepository.create(createContactInput);
@@ -33,6 +48,11 @@ export class ContactService {
     return contact;
   }
 
+  /**
+   * Updates a contact
+   * @param createContactInput: Contact update record entries
+   * @returns Updated Contact
+   */
   async updateContact(
     email: string,
     updateContactInput: UpdateContact,
@@ -44,32 +64,25 @@ export class ContactService {
     return contact;
   }
 
-  // async addOpportunity(email: string) {
-  //   const opp = {
-  //     name: 'hai',
-  //     account: 'acc',
-  //   };
-  //   const newOpp = this.opportunityRepository.create(opp);
-  //   const contact = await this.getContactByEmail(email);
-  //   contact.opportunities = [newOpp];
-  //   const savedcontact = await this.contactRepository.save(contact);
-  //   return savedcontact;
-  // }
-
+  /**
+   * Deletes a contact and contact entry in opportunity
+   * @param email: contact email
+   * @param transactionManager: running this as a transaction
+   * @returns: Boolean
+   */
   async deleteContact(
     email: string,
     transactionManager: EntityManager = getManager(this.connection.name),
   ) {
     console.log('Delete Started');
-    // const manager = getManager();
     const result = await this.findContactAndOpportunity(undefined, email);
-    console.log('contact', result);
 
+    // opportunities linked to contact
     const listOpportunityId: string[] = result.opportunities.map(
       (opp) => opp.id,
     );
 
-    // delete primary contact from
+    // delete primary contact from oppportunity
     listOpportunityId.forEach(async (oppId) => {
       await transactionManager
         .createQueryBuilder()
@@ -84,6 +97,7 @@ export class ContactService {
         .execute();
     });
 
+    // delete contact
     await transactionManager
       .createQueryBuilder()
       .delete()
@@ -95,6 +109,11 @@ export class ContactService {
     return true;
   }
 
+  /**
+   * Function to convert opportunity to GQL type
+   * @param opportunity: opportunity entity
+   * @returns: Opportunity GQL type
+   */
   private convertToGraphqlObject(opportunity: any[]): Opportunity[] {
     const convertedOpp = opportunity.map((opp) => {
       const modOpp: any = opp;
@@ -104,6 +123,12 @@ export class ContactService {
     return convertedOpp;
   }
 
+  /**
+   * Finds contact and opportunity linked to contact in DB
+   * @param nameInput: name contact
+   * @param emailInput: email contact
+   * @returns: Contact record
+   */
   private async findContactAndOpportunity(
     nameInput: string = undefined,
     emailInput: string = undefined,
@@ -134,6 +159,12 @@ export class ContactService {
     return contactObj;
   }
 
+  /**
+   * Finds only contact in DB
+   * @param nameInput: name contact
+   * @param emailInput: email contact
+   * @returns: Contact record
+   */
   public async findContact(
     nameInput: string = undefined,
     emailInput: string = undefined,
@@ -155,6 +186,10 @@ export class ContactService {
     return result;
   }
 
+  /**
+   * Opportunities in DB
+   * @returns List of contact email in the DB
+   */
   async getAllContact() {
     const manager = getManager();
     const contact = await manager

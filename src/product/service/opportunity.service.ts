@@ -112,11 +112,6 @@ export class OpportunityService {
     opportunityAccount: string,
     contactEmail: string,
   ): Promise<Opportunity> {
-    // const contactList = contactEmailList.map((contactEmail) => {
-    //   const contact = this.contactService.getContactByEmail(contactEmail);
-    //   return contact;
-    // });
-
     const contact: Contact = await this.contactService.findContact(
       undefined,
       contactEmail,
@@ -156,11 +151,20 @@ export class OpportunityService {
     return true;
   }
 
+  /**
+   * Delete an Opportunity
+   * @param opportunityAccount: opportunity Account
+   * @returns boolean
+   */
   async deleteOpportunity(opportunityAccount: string) {
     await this.opportunityRepository.delete({ account: opportunityAccount });
     return true;
   }
 
+  /**
+   * All opportunity
+   * @returns List of all opportunity account name in DB
+   */
   async getAllOpportunity() {
     const manager = getManager();
     const opportuntiy = await manager
