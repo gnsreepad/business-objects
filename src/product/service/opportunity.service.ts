@@ -23,6 +23,11 @@ export class OpportunityService {
     private readonly contactService: ContactService,
   ) {}
 
+  /**
+   * Finds opportunity and contact listed to an opportunity
+   * @param name opportunity name
+   * @returns opportunity and contact listed
+   */
   async getOpportunityByName(name: string): Promise<Opportunity> {
     let opportunity;
     try {
@@ -43,6 +48,11 @@ export class OpportunityService {
     return opportunity;
   }
 
+  /**
+   * Finds opportunity and contact listed to an opportunity
+   * @param account opportunity account
+   * @returns opportunity and contact listed
+   */
   async getOpportunityByAccount(account: string): Promise<Opportunity> {
     let opportunity;
     try {
@@ -63,6 +73,11 @@ export class OpportunityService {
     return opportunity;
   }
 
+  /**
+   * Created an opportunity
+   * @param opportunityInput opportunity input fields
+   * @returns opportunity record added in DB
+   */
   async CreateOpportunity(
     opportunityInput: CreateOpportunity,
   ): Promise<Opportunity> {
@@ -71,6 +86,11 @@ export class OpportunityService {
     return opportunity;
   }
 
+  /**
+   * Update an opportunity
+   * @param updateOpportunityInput opportunity update fields
+   * @returns opportunity record updated in DB
+   */
   async UpdateOpportunity(
     account: string,
     updateOpportunityInput: UpdateOpportunity,
@@ -82,6 +102,12 @@ export class OpportunityService {
     return opportunity;
   }
 
+  /**
+   * Add contact to an opportunity
+   * @param opportunityAccount: account of opportunity
+   * @param contactEmail: contact email
+   * @returns returns updated opportunity
+   */
   async addContact(
     opportunityAccount: string,
     contactEmail: string,
